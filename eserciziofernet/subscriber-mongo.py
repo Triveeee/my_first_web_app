@@ -8,7 +8,6 @@ from json import *
 
 #------------------------------------------------
 #Dati
-chiave = 'fM5t5hPaMlRWtmfpnbaaDAsYJvsDnDE5Ehd_9oYirEg='
 topic = 'casa/1/misurazioni'
 BROKER_HOST = '80.210.122.173'
 PORTA_BROKER = 1883
