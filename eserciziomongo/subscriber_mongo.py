@@ -8,7 +8,7 @@ from json import *
 #------------------------------------------------
 #Dati
 
-topic = 'casa/1/misurazioni'
+topic = 'atlas/mongodb/case'
 BROKER_HOST = '80.210.122.173'
 PORTA_BROKER = 1883
 

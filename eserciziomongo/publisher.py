@@ -8,7 +8,7 @@ import json
 #------------------------------------------------
 #Dati
 
-topic = 'casa/1/misurazioni'
+topic = 'atlas/mongodb/case'
 BROKER_HOST = '80.210.122.173'
 PORTA_BROKER = 1883
 
@@ -56,7 +56,8 @@ client.loop_start()
 
 try:
     while True:
-        casa = createHome(1)
+        n = randint(1 , 4)
+        casa = createHome(n)
         print(casa)
         client.publish(topic, casa)
         sleep(5)
