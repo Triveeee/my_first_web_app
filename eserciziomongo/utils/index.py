@@ -1,13 +1,9 @@
 import os
 from platform import *
 from pandas import *
+from utils.gadget import *
 
-def menuStamp():
-    print('\n------------------------------------ \n')
-    print('#1 --> tempo reale')
-    print('#2 --> media')
-    print('\n------------------------------------ \n') 
-
+# creazione menu nel terminale
 def menu():
     n = 0
     while(n > 10 or n < 1):
@@ -15,43 +11,19 @@ def menu():
     topic = 'casa/' + str(n) + '/misurazioni'
     print(menuStamp())
     choose = int(input('scegli : '))
-    return (topic , choose , n)
+    return (choose , n)
 
+#comando di pulizia schermo
 def clear():
     if(system() == 'Windows'):
         os.system('cls')
     if(system() == 'Linux'):
-        os.system('clear')
-
-def addElement(empty_dictionary, contenuto , nome ):
-     empty_dictionary['cucina'].append(contenuto[0]['cucina'][nome])
-     empty_dictionary['soggiorno'].append(contenuto[1]['soggiorno'][nome])
-     empty_dictionary['mansarda'].append(contenuto[2]['mansarda'][nome])
-     empty_dictionary['camera_da_letto'].append(contenuto[3]['camera_da_letto'][nome])
-     return(empty_dictionary)   
+        os.system('clear')  
     
-def media(table):
-    table_medie = {"cucina": 0, "soggiorno": 0, "mansarda": 0, "camera_da_letto": 0}
-    medie = []
-    for i in table:
-        somma = 0
-        for element in table[i]:
-            somma = somma + element
-            media = somma/len(table[i])
-            medie.append(media)
-    
-    i = 0    
-    for element in table_medie:
-        table_medie[element] = medie[i]
-        i+=1
-
-    return(table_medie)
-
-
-def findLastElement(items , n):
+#crazione di una lista di DataFrame e Series per la stampa dei dati con pandas
+def createDataFrameArray(items , n):
     table_temp = {"cucina": [], "soggiorno": [], "mansarda": [] , "camera_da_letto": []}
     table_umidita = {"cucina": [], "soggiorno": [], "mansarda": [] , "camera_da_letto": []}
-    table_medie = {"cucina": 0, "soggiorno": 0, "mansarda": 0, "camera_da_letto": 0}
     items = items[(len(items) - n): ]
 
     for i in items:
@@ -59,17 +31,26 @@ def findLastElement(items , n):
         table_temp = addElement(table_temp, stanze , 'temperatura')
         table_umidita = addElement(table_umidita , stanze , 'umidita')
     
-    table_medie = media(table_temp)    
+    table_medie_temp = media(table_temp)
+    table_medie_umid = media(table_umidita)   
 
-    return(DataFrame(table_temp) , DataFrame(table_umidita) , Series(table_medie))
+    return(DataFrame(table_temp) , DataFrame(table_umidita) , Series(table_medie_temp) , Series(table_medie_umid))
 
+#crea una Series di dati
 def createSeries(dati):
-    serie = Series(dati)
-    return(serie)
+    count = 1
+    for i in dati:
+        print("[" + str(count) + "] --> ", i , '\n')
+        count+=1
 
+#mostra i vari dataframe
 def show(dati):
     print('**TEMPERATURA**\n',dati[0], '\n')
     print('------------------------------------------------------------', '\n')
     print('**UMIDITA**\n',dati[1], '\n')
     print('------------------------------------------------------------', '\n')
-    print('**MEDIA**\n',dati[2],'\n')
+    print('**MEDIA_TEMP**\n',dati[2],'\n')
+    print('------------------------------------------------------------', '\n')
+    print('**MEDIA_UMIDITA**\n',dati[3],'\n')
+
+
