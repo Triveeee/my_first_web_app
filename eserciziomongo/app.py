@@ -4,7 +4,7 @@ from random import *
 from datetime import *
 from time import *
 from json import *
-import utils.menu as utils
+import utils.index as utils
 
 #------------------------------------------------
 #Dati
