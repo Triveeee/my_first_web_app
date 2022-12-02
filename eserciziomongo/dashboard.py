@@ -22,7 +22,7 @@ def stream(n_casa):
         while(True):
             utils.clear()
             dati = collection.find({"payload.casa": n_casa})
-            serie = utils.createSeries(dati)
+            utils.showSeries(dati)
             print(serie)
             sleep(5)
     except KeyboardInterrupt:

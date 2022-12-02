@@ -37,7 +37,7 @@ def createDataFrameArray(items , n):
     return(DataFrame(table_temp) , DataFrame(table_umidita) , Series(table_medie_temp) , Series(table_medie_umid))
 
 #crea una Series di dati
-def createSeries(dati):
+def showSeries(dati):
     count = 1
     for i in dati:
         print("[" + str(count) + "] --> ", i , '\n')
