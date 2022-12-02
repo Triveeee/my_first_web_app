@@ -23,7 +23,6 @@ def stream(n_casa):
             utils.clear()
             dati = collection.find({"payload.casa": n_casa})
             utils.showSeries(dati)
-            print(serie)
             sleep(5)
     except KeyboardInterrupt:
         print('stop')
