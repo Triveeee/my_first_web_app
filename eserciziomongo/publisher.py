@@ -33,17 +33,19 @@ collection = db.case
 #Funzioni
 
 def createHome(n_casa):
-    temp = randint(0,40)
-    umidita = randint(1 , 100)
-    time_stamp = datetime.now
+    minimo = 1
+    massimo = 100
+    tempo = datetime.time(datetime.now())
+    data = datetime.date(datetime.now())
     home = {
         "casa": n_casa,
-        "tempo": str(time_stamp),
+        "data": data,
+        "tempo": tempo,
         "stanze": [
-            {"cucina": {"temperatura": temp, "umidita": umidita}},
-            {"soggiorno": {"temperatura": temp, "umidita": umidita}},
-            {"mansarda": {"temperatura": temp, "umidita": umidita}},
-            {"camera_da_letto": {"temperatura": temp, "umidita": umidita}}
+            {"cucina": {"temperatura": randint(minimo , massimo), "umidita": randint(minimo , massimo)}},
+            {"soggiorno": {"temperatura": randint(minimo , massimo), "umidita": randint(minimo , massimo)}},
+            {"mansarda": {"temperatura": randint(minimo , massimo), "umidita": randint(minimo , massimo)}},
+            {"camera_da_letto": {"temperatura": randint(minimo , massimo), "umidita": randint(minimo , massimo)}}
         ]
     }
     home = json.dumps(home , indent=4)

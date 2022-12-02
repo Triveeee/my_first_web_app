@@ -9,7 +9,7 @@ import json
 #------------------------------------------------
 #Dati
 chiave = 'fM5t5hPaMlRWtmfpnbaaDAsYJvsDnDE5Ehd_9oYirEg='
-topic = 'casa/1/misurazioni'
+topic = 'atlas/mongodb/case'
 BROKER_HOST = '80.210.122.173'
 PORTA_BROKER = 1883
 
@@ -43,17 +43,19 @@ def cryptation(message):
     return message_cryptated
 
 def createHome(n_casa):
-    temp = randint(0,40)
-    umidita = randint(1 , 100)
-    time_stamp = datetime.now
+    minimo = 1
+    massimo = 100
+    data = datetime.date(datetime.now())
+    tempo = datetime.time(datetime.now())
     home = {
         "casa": n_casa,
-        "tempo": str(time_stamp),
+        "data": str(data),
+        "tempo": str(tempo),
         "stanze": [
-            {"cucina": {"temperatura": temp, "umidita": umidita}},
-            {"soggiorno": {"temperatura": temp, "umidita": umidita}},
-            {"mansarda": {"temperatura": temp, "umidita": umidita}},
-            {"camera_da_letto": {"temperatura": temp, "umidita": umidita}}
+            {"cucina": {"temperatura": randint(minimo , massimo), "umidita": randint(minimo , massimo)}},
+            {"soggiorno": {"temperatura": randint(minimo , massimo), "umidita": randint(minimo , massimo)}},
+            {"mansarda": {"temperatura": randint(minimo , massimo), "umidita": randint(minimo , massimo)}},
+            {"camera_da_letto": {"temperatura": randint(minimo , massimo), "umidita": randint(minimo , massimo)}}
         ]
     }
     home = json.dumps(home , indent= 4)   # <--- trasformazione in stringa json
@@ -66,7 +68,8 @@ def createHome(n_casa):
 client.loop_start()
 try:
     while True:
-        casa = createHome(1) # < -- casa criptata
+        n = randint(1 , 4)
+        casa = createHome(n) # < -- casa criptata
         print(casa)
         client.publish(topic, casa)  # < --- invia il messaggio criptato al broker in bytes
         sleep(5)

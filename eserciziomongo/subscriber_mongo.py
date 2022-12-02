@@ -46,7 +46,6 @@ def on_message(client , userdata , msg):
     dati_json = msg.payload.decode("utf-8")
     data = {'_id': id_msg , 'payload': loads(dati_json)}
     collection.insert_one(data)
-    print(dati_json)
 
 #---------------------------------------------
 #CallBack
